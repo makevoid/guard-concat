@@ -45,21 +45,5 @@ module Guard
       File.open(@output, "w"){ |f| f.write content.strip }
     end
 
-    # def self.concat_unix(match, dest)
-    #   p `cat "#{match}" > #{dest}`
-    # end
-
-  end
-
-  class Dsl
-    # def concat(dest)
-    #   p self
-    #   watcher = self.instance_variable_get("@watchers").last
-    #   src = watcher.pattern
-    #   Concat.concat src, dest
-    #   # Notifier.notify "Concat done in #{dest}"
-    # end
   end
 end
-
-# Guard::Concat.concat %r{public/js/(?!c).+.js}, "public/js/c.js"
