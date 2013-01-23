@@ -5,7 +5,7 @@ require 'guard/watcher'
 module Guard
   class Concat < Guard
 
-    VERSION = '0.0.2'
+    VERSION = '0.0.3'
 
     def initialize(watchers=[], opts={})
       @output = "#{opts[:output]}.#{opts[:type]}"
