@@ -40,9 +40,11 @@ Advanced usage:
 
 ``` ruby
 # this is a recommended file structure when using *
-# plugins usually need libraries so put libraries like jquery in the libs directory, then your jquery (or another library) plugin(s) in the plugins dir and at the end your main dir
-guard :concat, type: "js", files: %w(libs/* plugins/* *), input_dir: "public/js", output: "public/js/all"
+# plugins usually need libraries so put libraries like jquery in the libs directory, then your jquery (or another library) plugin(s) in the plugins dir and at the end your main file(s)
+guard :concat, type: "js", files: %w(libs/* plugins/* main), input_dir: "public/js", output: "public/js/all"
 ```
+
+it's not possible to use * or ./* alone, you have to use * after a directory name, like this: `dir/*`
 
 ## Versions changelog
 
