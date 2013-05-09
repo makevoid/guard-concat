@@ -29,4 +29,22 @@ guard :concat, type: "js", files: %w(b a), input_dir: "public/js", output: "publ
 
 # analog css example
 guard :concat, type: "css", files: %w(c d), input_dir: "public/css", output: "public/css/all"
+
+# js example with *
+
+guard :concat, type: "js", files: %w(vendor/* b a), input_dir: "public/js", output: "public/js/all"
+# will concatenate all files in the vendor dir, then b then a (watch out of dependencies)
 ```
+
+Advanced usage:
+
+```
+# this is a recommended file structure when using *
+# plugins usually need libraries so put libraries like jquery in the libs directory, then your jquery (or another library) plugin(s) in the plugins dir and at the end your main dir
+guard :concat, type: "js", files: %w(libs/* plugins/* *), input_dir: "public/js", output: "public/js/all"
+```
+
+## Versions changelog
+
+0.0.4 - add star (*) support to load multiple files 
+0.0.3 - basic version

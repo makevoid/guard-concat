@@ -1,1 +1,4 @@
-guard :concat, type: "js", files: %w(b a), input_dir: "public/js", output: "public/js/all"
+# start the other guardfile with: guard -G Guardfile2
+
+guard :concat, type: "js", files: %w(a1 a2 vendor/*), input_dir: "public/js", output: "public/js/all"
+

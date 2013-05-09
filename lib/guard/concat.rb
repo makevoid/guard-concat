@@ -5,7 +5,7 @@ require 'guard/watcher'
 module Guard
   class Concat < Guard
 
-    VERSION = '0.0.3'
+    VERSION = '0.0.4'
 
     def initialize(watchers=[], opts={})
       @output = "#{opts[:output]}.#{opts[:type]}"
@@ -17,32 +17,54 @@ module Guard
       super watchers, opts
     end
 
-    # # Calls #run_all if the :all_on_start option is present.
-    # def start
-    #   run_all if options[:all_on_start]
-    # end
-
-    # # Call #run_on_change for all files which match this guard.
-    # def run_all
-    #   run_on_changes(Watcher.match_files(self, Dir.glob('{,**/}*{,.*}').uniq))
-    # end
-
     def run_on_changes(paths)
       concat
       UI.info "Concatenated #{@output}"
     end
 
+    # The actual concat method
+    #
+    # scans the :files passed as options
+    # supports * and expands them requiring all files in that path/folder
+
     def concat
       content = ""
       files = []
       @opts[:files].each do |file|
-        files << "#{@opts[:input_dir]}/#{file}.#{@opts[:type]}"
+        files += if single? file
+          ["#{@opts[:input_dir]}/#{file}.#{@opts[:type]}"]
+        else
+          expand file
+        end
       end
       files.each do |file|
         content << File.read(file)
         content << "\n"
       end
       File.open(@output, "w"){ |f| f.write content.strip }
+    end
+
+    def input_dir
+      @opts[:input_dir]
+    end
+
+    def type
+      @opts[:type]
+    end
+
+
+    private
+
+    # handle the star option (*)
+
+    def single?(file)
+      file !~ /\*/
+    end
+
+    def expand(file)
+      path = "#{input_dir}/#{file}.#{type}"
+      puts "expanding: #{path}"
+      Dir.glob path
     end
 
   end
