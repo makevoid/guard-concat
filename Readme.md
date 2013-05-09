@@ -38,7 +38,7 @@ guard :concat, type: "js", files: %w(vendor/* b a), input_dir: "public/js", outp
 
 Advanced usage:
 
-```
+``` ruby
 # this is a recommended file structure when using *
 # plugins usually need libraries so put libraries like jquery in the libs directory, then your jquery (or another library) plugin(s) in the plugins dir and at the end your main dir
 guard :concat, type: "js", files: %w(libs/* plugins/* *), input_dir: "public/js", output: "public/js/all"
