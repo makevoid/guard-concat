@@ -46,5 +46,5 @@ guard :concat, type: "js", files: %w(libs/* plugins/* *), input_dir: "public/js"
 
 ## Versions changelog
 
-0.0.4 - add star (*) support to load multiple files 
-0.0.3 - basic version
+- 0.0.4 - add star (*) support to load multiple files 
+- 0.0.3 - basic version

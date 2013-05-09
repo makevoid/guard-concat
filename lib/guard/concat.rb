@@ -63,7 +63,6 @@ module Guard
 
     def expand(file)
       path = "#{input_dir}/#{file}.#{type}"
-      puts "expanding: #{path}"
       Dir.glob path
     end
 
