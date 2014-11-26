@@ -1,20 +1,20 @@
 require 'guard'
-require 'guard/guard'
+require 'guard/plugin'
 require 'guard/watcher'
 
 module Guard
-  class Concat < Guard
+  class Concat < Plugin
 
-    VERSION = '0.0.4'
+    VERSION = '0.0.5'
 
-    def initialize(watchers=[], opts={})
+    def initialize(opts={})
       @output = "#{opts[:output]}.#{opts[:type]}"
       files = opts[:files].join("|")
       regex = %r{^#{opts[:input_dir]}/(#{files})\.#{opts[:type]}$}
       watcher = ::Guard::Watcher.new regex
       watchers << watcher
       @watchers, @opts = watchers, opts
-      super watchers, opts
+      super opts
     end
 
     def run_on_changes(paths)
