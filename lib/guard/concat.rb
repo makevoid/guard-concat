@@ -8,6 +8,7 @@ module Guard
     VERSION = '0.0.5'
 
     def initialize(opts={})
+      watchers = [] if !watchers
       @output = "#{opts[:output]}.#{opts[:type]}"
       files = opts[:files].join("|")
       regex = %r{^#{opts[:input_dir]}/(#{files})\.#{opts[:type]}$}
