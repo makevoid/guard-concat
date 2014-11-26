@@ -9,10 +9,12 @@ module Guard
 
     def initialize(opts={})
       @output = "#{opts[:output]}.#{opts[:type]}"
+      @opts = opts
+
+      super opts
+
       files = opts[:files].join("|")
       watchers << ::Guard::Watcher.new(%r{^#{opts[:input_dir]}/(#{files})\.#{opts[:type]}$})
-      @opts = opts
-      super opts
     end
 
     def run_on_changes(paths)
