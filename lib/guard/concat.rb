@@ -42,9 +42,17 @@ module Guard
       end
 
       if File.open(output_file, "w"){ |f| f.write content.strip }
-        UI.info "Concatenated #{file_names.join(', ')} to #{output_file}"
+        if @opts[:verbose]
+          UI.info "Concatenated #{file_names.join(', ')} to #{output_file}"
+        else
+          UI.info "Concatenated #{output_file}"
+        end
       else
-        UI.error "Error concatenating files to #{output_file}"
+        if @opts[:verbose]
+          UI.error "Error concatenating #{file_names.join(', ')} to #{output_file}"
+        else
+          UI.error "Error concatenating files to #{output_file}"
+        end
       end
     end
 
