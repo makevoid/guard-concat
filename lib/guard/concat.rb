@@ -8,19 +8,32 @@ module Guard
     VERSION = '0.0.5'
 
     def initialize(options = {})
+      super
+
       @output = "#{options[:output]}.#{options[:type]}"
       @opts = options
 
-      super options
+      if options[:files]
+        files = options[:files].join("|")
+        options[:watchers] = [] unless options[:watchers]
+        options[:watchers] << ::Guard::Watcher.new(%r{^#{options[:input_dir]}/(#{files})\.#{options[:type]}$})
+      end
+    end
 
-      files = options[:files].join("|")
-      options[:watchers] = [] unless options[:watchers]
-      options[:watchers] << ::Guard::Watcher.new(%r{^#{options[:input_dir]}/(#{files})\.#{options[:type]}$})
+    def start
+      concat
+    end
+
+    def reload
+      concat
+    end
+
+    def run_all
+      concat
     end
 
     def run_on_changes(paths)
       concat
-      ::Guard::UI.info "Concatenated #{@output}"
     end
 
     # The actual concat method
@@ -31,6 +44,7 @@ module Guard
     def concat
       content = ""
       files = []
+
       @opts[:files].each do |file|
         files += if single? file
           ["#{@opts[:input_dir]}/#{file}.#{@opts[:type]}"]
@@ -38,11 +52,17 @@ module Guard
           expand file
         end
       end
+
       files.each do |file|
         content << File.read(file)
         content << "\n"
       end
-      File.open(@output, "w"){ |f| f.write content.strip }
+
+      if File.open(@output, "w"){ |f| f.write content.strip }
+        ::Guard::UI.info "Concatenated #{@output}"
+      else
+        ::Guard::UI.error "Error contanenating #{@output}"
+      end
     end
 
     def input_dir
