@@ -1,6 +1,5 @@
 require 'guard'
 require 'guard/plugin'
-require 'guard/watcher'
 
 module Guard
   class Concat < Plugin
