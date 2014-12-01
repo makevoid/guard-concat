@@ -14,7 +14,8 @@ module Guard
       super opts
 
       files = opts[:files].join("|")
-      watchers << ::Guard::Watcher.new(%r{^#{opts[:input_dir]}/(#{files})\.#{opts[:type]}$})
+      options[:watchers] = [] unless options[:watchers]
+      options[:watchers] << ::Guard::Watcher.new(%r{^#{opts[:input_dir]}/(#{files})\.#{opts[:type]}$})
     end
 
     def run_on_changes(paths)
