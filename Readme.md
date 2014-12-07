@@ -50,3 +50,8 @@ it's not possible to use * or ./* alone, you have to use * after a directory nam
 
 - 0.0.4 - add star (*) support to load multiple files 
 - 0.0.3 - basic version
+
+## Contributors
+
+- [@ezekg](https://github.com/ezekg)
+- [@mikz](https://github.com/mikz)
