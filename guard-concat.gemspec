@@ -1,5 +1,5 @@
 # encoding: utf-8
-require_relative "lib/guard/concat"
+require "./lib/guard/concat"
 
 Gem::Specification.new do |s|
   s.name         = "guard-concat"
