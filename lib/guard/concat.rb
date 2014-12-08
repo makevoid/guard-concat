@@ -5,7 +5,7 @@ require 'guard/watcher'
 module Guard
   class Concat < Plugin
 
-    VERSION = '0.1.0'
+    VERSION = '0.1.1'
 
     def initialize(opts={})
       @opts = opts
