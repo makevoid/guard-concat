@@ -47,7 +47,7 @@ guard :concat, type: "js", files: %w(libs/* plugins/* main), input_dir: "public/
 it's not possible to use * or ./* alone, you have to use * after a directory name, like this: `dir/*`
 
 ## Versions changelog
-
+- 0.8.1 - add debug messages, add support for newer guard, add all_on_start option
 - 0.0.4 - add star (*) support to load multiple files 
 - 0.0.3 - basic version
 
