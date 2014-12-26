@@ -39,17 +39,17 @@ module Guard
         content << "\n"
       end
 
-      if File.open(output_file, "w"){ |f| f.write content.strip }
+      if writes content
         if @opts[:verbose]
-          UI.info "Concatenated #{file_names.join(', ')} to #{output_file}"
+          UI.info "concat: #{file_names.join(', ')} to #{output_file}"
         else
-          UI.info "Concatenated #{output_file}"
+          UI.info "concat: #{output_file}"
         end
       else
         if @opts[:verbose]
-          UI.error "Error concatenating #{file_names.join(', ')} to #{output_file}"
+          UI.error "concat: error: #{file_names.join(', ')} to #{output_file} - message: Error, "
         else
-          UI.error "Error concatenating files to #{output_file}"
+          UI.error "concat: Error concatenating files to #{output_file}"
         end
       end
     end
@@ -86,6 +86,10 @@ module Guard
     end
 
     private
+
+    def writes(content)
+      File.open(output_file, "w"){ |f| f.write content.strip }
+    end
 
     # handle the star option (*)
 
