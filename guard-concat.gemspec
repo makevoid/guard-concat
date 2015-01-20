@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
     Guard::Concat automatically concatenates files in one when watched files are modified.
   DESC
 
-  s.add_dependency "guard", ">= 2.0"
+  s.add_runtime_dependency 'guard', '~> 2.0'
 
   s.files        = %w(Readme.md LICENSE)
   s.files       += Dir["{lib}/**/*"]
